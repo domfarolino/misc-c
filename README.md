@@ -1,3 +1,3 @@
 # misc-c
 
-More to come...
+Miscellaneous examples of cool things in C without a logical home
