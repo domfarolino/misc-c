@@ -1,0 +1,57 @@
+02-buffer-overflow:     file format elf32-i386
+
+0804848b <secretFunction>:
+ 804848b:	55                   	push   %ebp
+ 804848c:	89 e5                	mov    %esp,%ebp
+ 804848e:	83 ec 08             	sub    $0x8,%esp
+ 8048491:	83 ec 0c             	sub    $0xc,%esp
+ 8048494:	68 90 85 04 08       	push   $0x8048590
+ 8048499:	e8 b2 fe ff ff       	call   8048350 <puts@plt>
+ 804849e:	83 c4 10             	add    $0x10,%esp
+ 80484a1:	83 ec 0c             	sub    $0xc,%esp
+ 80484a4:	68 a4 85 04 08       	push   $0x80485a4
+ 80484a9:	e8 a2 fe ff ff       	call   8048350 <puts@plt>
+ 80484ae:	83 c4 10             	add    $0x10,%esp
+ 80484b1:	90                   	nop
+ 80484b2:	c9                   	leave  
+ 80484b3:	c3                   	ret    
+
+080484b4 <echo>:
+ 80484b4:	55                   	push   %ebp
+ 80484b5:	89 e5                	mov    %esp,%ebp
+ 80484b7:	83 ec 18             	sub    $0x18,%esp
+ 80484ba:	83 ec 08             	sub    $0x8,%esp
+ 80484bd:	8d 45 f4             	lea    -0xc(%ebp),%eax
+ 80484c0:	50                   	push   %eax
+ 80484c1:	68 cd 85 04 08       	push   $0x80485cd
+ 80484c6:	e8 a5 fe ff ff       	call   8048370 <__isoc99_scanf@plt>
+ 80484cb:	83 c4 10             	add    $0x10,%esp
+ 80484ce:	83 ec 08             	sub    $0x8,%esp
+ 80484d1:	8d 45 f4             	lea    -0xc(%ebp),%eax
+ 80484d4:	50                   	push   %eax
+ 80484d5:	68 d0 85 04 08       	push   $0x80485d0
+ 80484da:	e8 61 fe ff ff       	call   8048340 <printf@plt>
+ 80484df:	83 c4 10             	add    $0x10,%esp
+ 80484e2:	90                   	nop
+ 80484e3:	c9                   	leave  
+ 80484e4:	c3                   	ret    
+
+080484e5 <main>:
+ 80484e5:	8d 4c 24 04          	lea    0x4(%esp),%ecx
+ 80484e9:	83 e4 f0             	and    $0xfffffff0,%esp
+ 80484ec:	ff 71 fc             	pushl  -0x4(%ecx)
+ 80484ef:	55                   	push   %ebp
+ 80484f0:	89 e5                	mov    %esp,%ebp
+ 80484f2:	51                   	push   %ecx
+ 80484f3:	83 ec 04             	sub    $0x4,%esp
+ 80484f6:	e8 b9 ff ff ff       	call   80484b4 <echo>
+ 80484fb:	b8 00 00 00 00       	mov    $0x0,%eax
+ 8048500:	83 c4 04             	add    $0x4,%esp
+ 8048503:	59                   	pop    %ecx
+ 8048504:	5d                   	pop    %ebp
+ 8048505:	8d 61 fc             	lea    -0x4(%ecx),%esp
+ 8048508:	c3                   	ret    
+ 8048509:	66 90                	xchg   %ax,%ax
+ 804850b:	66 90                	xchg   %ax,%ax
+ 804850d:	66 90                	xchg   %ax,%ax
+ 804850f:	90                   	nop
