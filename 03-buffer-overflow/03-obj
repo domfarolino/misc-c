@@ -1,0 +1,54 @@
+03-shell-code:     file format elf32-i386
+
+0804846b <func>:
+ 804846b:	55                   	push   %ebp
+ 804846c:	89 e5                	mov    %esp,%ebp
+ 804846e:	83 ec 78             	sub    $0x78,%esp // 120 bytes for local variables
+ 8048471:	83 ec 08             	sub    $0x8,%esp
+ 8048474:	ff 75 08             	pushl  0x8(%ebp)
+ 8048477:	8d 45 94             	lea    -0x6c(%ebp),%eax // buffer is 108 bytes away from base pointer, set eax to it
+ 804847a:	50                   	push   %eax // push buffer as arg or strcpy
+ 804847b:	e8 b0 fe ff ff       	call   8048330 <strcpy@plt> // call strcpy
+ 8048480:	83 c4 10             	add    $0x10,%esp
+ 8048483:	83 ec 08             	sub    $0x8,%esp
+ 8048486:	8d 45 94             	lea    -0x6c(%ebp),%eax // buffer is 108 bytes away from base pointer, set eax to it
+ 8048489:	50                   	push   %eax // push buffer as arg to printf
+ 804848a:	68 70 85 04 08       	push   $0x8048570 // push "Welcome " as arg to printf
+ 804848f:	e8 8c fe ff ff       	call   8048320 <printf@plt> // call printf
+ 8048494:	83 c4 10             	add    $0x10,%esp
+ 8048497:	90                   	nop
+ 8048498:	c9                   	leave  
+ 8048499:	c3                   	ret    
+
+0804849a <main>:
+ 804849a:	8d 4c 24 04          	lea    0x4(%esp),%ecx
+ 804849e:	83 e4 f0             	and    $0xfffffff0,%esp
+ 80484a1:	ff 71 fc             	pushl  -0x4(%ecx)
+ 80484a4:	55                   	push   %ebp
+ 80484a5:	89 e5                	mov    %esp,%ebp
+ 80484a7:	51                   	push   %ecx
+ 80484a8:	83 ec 04             	sub    $0x4,%esp
+ 80484ab:	89 c8                	mov    %ecx,%eax
+ 80484ad:	83 38 01             	cmpl   $0x1,(%eax)
+ 80484b0:	7f 17                	jg     80484c9 <main+0x2f>
+ 80484b2:	83 ec 0c             	sub    $0xc,%esp
+ 80484b5:	68 7c 85 04 08       	push   $0x804857c
+ 80484ba:	e8 81 fe ff ff       	call   8048340 <puts@plt>
+ 80484bf:	83 c4 10             	add    $0x10,%esp
+ 80484c2:	b8 01 00 00 00       	mov    $0x1,%eax
+ 80484c7:	eb 19                	jmp    80484e2 <main+0x48>
+ 80484c9:	8b 40 04             	mov    0x4(%eax),%eax
+ 80484cc:	83 c0 04             	add    $0x4,%eax
+ 80484cf:	8b 00                	mov    (%eax),%eax
+ 80484d1:	83 ec 0c             	sub    $0xc,%esp
+ 80484d4:	50                   	push   %eax
+ 80484d5:	e8 91 ff ff ff       	call   804846b <func>
+ 80484da:	83 c4 10             	add    $0x10,%esp
+ 80484dd:	b8 00 00 00 00       	mov    $0x0,%eax
+ 80484e2:	8b 4d fc             	mov    -0x4(%ebp),%ecx
+ 80484e5:	c9                   	leave  
+ 80484e6:	8d 61 fc             	lea    -0x4(%ecx),%esp
+ 80484e9:	c3                   	ret    
+ 80484ea:	66 90                	xchg   %ax,%ax
+ 80484ec:	66 90                	xchg   %ax,%ax
+ 80484ee:	66 90                	xchg   %ax,%ax

