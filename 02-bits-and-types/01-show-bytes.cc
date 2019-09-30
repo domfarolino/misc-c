@@ -1,7 +1,8 @@
 #include <iostream>
 
+#pragma GCC diagnostic ignored "-Wconstant-conversion"
+
 // Right now this shows in big-endian form.
-// TODO: make little endian
 void showBits(char c) {
   int bit;
   for (int i = 7; i >= 0; --i) {
@@ -14,8 +15,8 @@ void showBits(char c) {
 }
 
 int main() {
-  char a;
-  unsigned char b = 128;
+  char a; // [-128, 127].
+  unsigned char b; // [0, 255].
 
   printf("sizeof(char): %lu\n", sizeof(char));
   a = 127;
@@ -24,7 +25,11 @@ int main() {
   showBits(b);
   std::cout << "a == b: " << bool(a == b) << std::endl;
 
-  a = 128; // -128 because of overflow, however bits will be same as unsigned assuming two's complement
+  printf("Now assigning both |a| and |b| to 128\n");
+
+  // Overflows to -128. Bits will be the same as |b|
+  // however, assuming two's complement.
+  a = 128;
   b = 128;
   showBits(a);
   showBits(b);
