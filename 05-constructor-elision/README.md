@@ -6,5 +6,5 @@ or move-constructor is unnecessary, so it simply omits the call,
 even if there are side-effects. It is an interesting thing to see
 in action.
 
-TODO(domfarolino): This is a tricky topic, so add links to some
-resources, as elaborate in this README.
+A really good stackoverflow post on this can be found
+**[here](https://stackoverflow.com/questions/12953127)**.
